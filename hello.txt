@@ -1,0 +1,10 @@
+hello git 1
+hello git 2
+hello git 3
+hello git 4
+hello git 5
+hello git dev
+hello git remote
+
+同事a的第一次提交
+这是 dev 独有的内容，master 不应该有
