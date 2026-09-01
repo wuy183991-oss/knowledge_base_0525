@@ -7,10 +7,18 @@ authors = [
     { name = "吴柯", email = "2248914366@qq.com" }
 ]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "flagembedding>=1.4.2",
+    "pymilvus[model]>=3.0.1",
+    "transformers>=5.16.1",
+]
 
 [project.scripts]
 knowledge-base = "knowledge_base:main"
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
 
 [build-system]
 requires = ["uv_build>=0.12.6,<0.13.0"]
