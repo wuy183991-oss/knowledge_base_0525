@@ -221,7 +221,7 @@ class NodeMDImg(BaseNode):
         print(f"将图片存入{upload_dir}目录下")
 
         #1 清理minio目录 避免目录冲突
-        self._clean_minio_dir(minio_client,upload_dir)
+        # self._clean_minio_dir(minio_client,upload_dir)
 
         #2 批量上传图片，获得minio的urls
         urls = self.upload_images_batch(minio_client,upload_dir,target_images)

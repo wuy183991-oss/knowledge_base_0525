@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 from typing import TypeVar, Optional
 import logging
 
-from processor.import_process.config import ImportConfig, get_config
+from processor.import_process.import_config import ImportConfig, get_config
 from processor.import_process.exceptions import ImportProcessError
 
 

@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     workflow = KBImportWorkflow()
     # graph = workflow.graph
-    init_state = {"import_file_path":r"D:/掌柜智库课件0525/2.资料/04-设备手册汇总/doc/H3C LA2608室内无线网关 用户手册-6W100-整本手册.pdf"}
+    init_state = {"import_file_path":r"D:/掌柜智库课件0525/2.资料/04-设备手册汇总/doc/华为擎云B530 用户指南-(PUCZ,Windows11_03,zh-cn).pdf"}
     # for event in workflow.run(init_state,stream=True):
     #     print(event)
 
