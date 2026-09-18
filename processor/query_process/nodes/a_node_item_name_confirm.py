@@ -211,6 +211,7 @@ class NodeItemNameConfirm(NodeBase):
             if len(mid_results) > 0:
                 for mr in mid_results[:5]:
                     options.append(mr.get("item_name"))
+            
             ####################################################################################    
 
         #低于0.6，无匹配结果，不处理，都是空值
@@ -241,11 +242,13 @@ class NodeItemNameConfirm(NodeBase):
             #封装结果
             state["item_names"]=confirmed
             state["answer"]=""
+            return state
             
         #2 有备选(>0.6 <0.8)
         if options:
             state["item_names"]=[]
             state["answer"] = f"您是想问以下哪个产品:{options}？ 请明确一下型号"
+            return state
 
         #3 无命中(<0.6)
         if not confirmed and not options:

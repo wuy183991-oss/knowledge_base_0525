@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <header>
+        <title>前端页面</title>
+    </header>
+    <body>
+        <h1>前端测试</h1>
+        <p>后端地址：http://127.0.0.1:8001/api/data</p>
+        <pre id="r"></pre>
+        <button onclick="test()">点击请求后端服务</button>
+        <script>
+            async function test(){
+                const r = document.getElementById("r");
+                // r.innerText = "你好，我来了"
+                const response = await fetch("http://127.0.0.1:8001/api/data");
+                const jsonData = await response.json();
+                jsonStr = JSON.stringify(jsonData);
+                r.innerText = jsonStr
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html> 
+    <head>
+        <title>前端页面sse3</title>
+    </head>
+        <h3>sse3测试页面</h3>
+        <input type="text" value="" id="sessionIdInput" placeholder="请输入sessionId" />
+        <button onclick="submitTask()">提交</button>
+        <div id="result"></div>
+    </body>
+    <script>
+        async function submitTask(){
+            const sessionId = document.getElementById("sessionIdInput").value;
+
+            const response = await fetch('http://localhost:8001/query/${sessionId}') //query 直接返回结果
+            
+            const resultDom =  document.getElementById("result")
+            
+            if(response.ok){
+                resultData = await response.json();
+                resultDom.innerText += resultData.message + "<br/>"
+            }
+
+            const eventSource = new EventSource(`http://localhost:8001/stream/${sessionId}`); //通过sse长连接获得服务器的队列的执行结果
+            
+
+            eventSource.onmessage = function(){ 
+                if (event.data === "[END]"){
+                    eventSource.close();
+                    return;
+                }else{
+                    resultDom.innerText += event.data + "<br/>";
+
+                }
+            }
+        }
+    </script>
+</html>
