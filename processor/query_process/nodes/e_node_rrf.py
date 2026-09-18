@@ -31,8 +31,8 @@ class NodeRrf(NodeBase):
         embedding_chunks = state.get("embedding_chunks")
         hyde_embedding_chunks = state.get("hyde_embedding_chunks")
 
-        embedding_chunks_list = [doc.get("entity") for doc in embedding_chunks]
-        hyde_embedding_chunks_list = [doc.get("entity") for doc in hyde_embedding_chunks]
+        embedding_chunks_list = [doc.get("entity") for doc in embedding_chunks or []]
+        hyde_embedding_chunks_list = [doc.get("entity") for doc in hyde_embedding_chunks or []]
 
         #2 封装融合对象
         rrf_inputs = [
@@ -46,7 +46,7 @@ class NodeRrf(NodeBase):
         #4 返回结果处理
         rrf_chunks = [doc for doc,_ in rrf_merge_results] #只要文档不要分
         state["rrf_chunks"] = rrf_chunks
-        print(f"rrf_chunks:{rrf_chunks}")
+        # print(f"rrf_chunks:{rrf_chunks}")
         return state
 
     def _rrf_merge(self,rrf_inputs:List[Tuple],k:int=60,max_results:int = 5):

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html> 
+    <head>
+        <title>前端页面sse4</title>
+    </head>
+        <h3>sse4测试页面</h3>
+        <input type="text" id="queryInput" placeholder="请输入查询内容" value="Python SSE怎么用">
+        <button onclick="submitTask()">提交</button>
+        <div id="result"></div>
+    </body>
+    <script>
+        async function submitTask(){
+            const sessionId = "query_" + Date.now(); //随机生成
+            const query = document.getElementById("queryInput").value;
+            
+
+            const response = await fetch('http://localhost:8001/query',
+                {
+                    method: 'post',
+                    headers:{"Content-Type": "application/json"},
+                    body: JSON.stringify({query:query,session_id:sessionId})
+                }
+            ) //query 直接返回结果
+            
+            const resultDom =  document.getElementById("result")
+            
+            if(response.ok){
+                resultData = await response.json();
+                resultDom.innerText += resultData.message + "<br/>"
+            }
+
+            const eventSource = new EventSource(`http://localhost:8001/stream/${sessionId}`); //通过sse长连接获得服务器的队列的执行结果
+            
+
+            eventSource.onmessage = function(){ 
+                if (event.data === "[END]"){
+                    eventSource.close();
+                    return;
+                }else{
+                    resultDom.innerText += event.data + "<br/>";
+
+                }
+            }
+        }
+    </script>
+</html>
